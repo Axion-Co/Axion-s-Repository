@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
 <div class="app-viewport">
@@ -34,7 +35,7 @@
         <button class="drawer-item" data-nav="settings">⚙️ Settings</button>
         <div class="drawer-divider"></div>
         <button class="drawer-item" data-nav="privacy">🔒 Privacy Policy</button>
-        <button class="drawer-item" data-nav="tnc">📄 Terms & Conditions</button>
+        <button class="drawer-item" data-nav="tnc">📄 Terms &amp; Conditions</button>
         <button class="drawer-item" data-nav="about">ℹ️ About Us</button>
         <button class="drawer-item" data-nav="contact">📞 Contact Us</button>
       </nav>
@@ -53,18 +54,8 @@
     <section id="searchResults" aria-live="polite"></section>
   </main>
 
-  <main id="page-chats" class="page"><div class="form-card empty"><div style="font-size:2.6rem">💬</div><h2 style="color:var(--primary);margin:8px 0">Family Connections</h2><p>Express interest in a profile to begin a connection. Real messaging will be connected to the backend later.</p></div></main>
-
-  <main id="page-profile" class="page">
-    <form class="form-card" id="profileForm"><h2 class="section-title" style="color:var(--primary);margin-bottom:16px">My Candidate Profile</h2>
-      <div class="form-group"><label for="name">Full Candidate Name</label><input id="name" name="name" class="form-control" required></div>
-      <div class="form-group"><label for="privacy">Photo Privacy</label><select id="privacy" name="photoPrivacy" class="form-control"><option value="public">Visible to everyone</option><option value="protected">Protected — visible on acceptance</option></select></div>
-      <div class="form-group"><label for="district">Punjab District / Location</label><select id="district" name="district" class="form-control"><option>Ludhiana</option><option>Amritsar</option><option>Jalandhar</option><option>Mohali</option><option>NRI / Overseas</option></select></div>
-      <div class="form-group"><label for="gotra">Gotra / Caste</label><input id="gotra" name="gotra" class="form-control" required></div>
-      <button class="btn btn-primary" type="submit">Save Changes</button>
-    </form>
-  </main>
-
+  <main id="page-chats" class="page"><div class="form-card empty"><div class="empty-icon" aria-hidden="true">💬</div><h2>Family Connections</h2><p>Express interest in a profile to begin a connection. Real messaging will be connected to the backend later.</p></div></main>
+  <main id="page-profile" class="page"><form class="form-card" id="profileForm"><h2 class="section-title" style="color:var(--primary);margin-bottom:16px">My Candidate Profile</h2><div class="form-group"><label for="name">Full Candidate Name</label><input id="name" name="name" class="form-control" required></div><div class="form-group"><label for="privacy">Photo Privacy</label><select id="privacy" name="photoPrivacy" class="form-control"><option value="public">Visible to everyone</option><option value="protected">Protected — visible on acceptance</option></select></div><div class="form-group"><label for="district">Punjab District / Location</label><select id="district" name="district" class="form-control"><option>Ludhiana</option><option>Amritsar</option><option>Jalandhar</option><option>Mohali</option><option>NRI / Overseas</option></select></div><div class="form-group"><label for="gotra">Gotra / Caste</label><input id="gotra" name="gotra" class="form-control" required></div><button class="btn btn-primary" type="submit">Save Changes</button></form></main>
   <main id="page-settings" class="page"><div class="form-card"><h2 class="section-title" style="color:var(--primary);margin-bottom:8px">Settings</h2><p style="color:var(--muted);font-size:.86rem;line-height:1.6">Manage your profile, privacy preferences and support options. Account security will be handled by the future authentication service.</p></div></main>
   <main id="page-privacy" class="page"><div class="form-card"><h2 class="section-title" style="color:var(--primary);margin-bottom:8px">Privacy Policy</h2><p style="color:var(--muted);line-height:1.6">Sanjog is designed around privacy-first profile sharing. Protected photos and personal contact details should only be exposed through authorized backend flows once those services are connected.</p></div></main>
   <main id="page-tnc" class="page"><div class="form-card"><h2 class="section-title" style="color:var(--primary);margin-bottom:8px">Terms &amp; Conditions</h2><p style="color:var(--muted);line-height:1.6">Users are expected to provide truthful information and use Sanjog respectfully. Final legal terms will be reviewed before production launch.</p></div></main>
@@ -80,11 +71,7 @@
   </nav>
 </div>
 
-<div class="modal" id="storyModal" role="dialog" aria-modal="true" aria-label="Story">
-  <div><div class="progress"><span id="storyProgress"></span></div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px"><strong id="storyName">Story</strong><button class="header-btn" id="closeStory" style="color:white" aria-label="Close story">✕</button></div></div>
-  <div class="modal-card"><p id="storyDetails" style="font-size:1.2rem;font-weight:750"></p></div>
-  <button class="btn btn-primary" id="storyReply">Send Reply</button>
-</div>
+<div class="modal" id="storyModal" role="dialog" aria-modal="true" aria-label="Story"><div><div class="progress"><span id="storyProgress"></span></div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px"><strong id="storyName">Story</strong><button class="header-btn" id="closeStory" style="color:white" aria-label="Close story">✕</button></div></div><div class="modal-card"><p id="storyDetails" style="font-size:1.2rem;font-weight:750"></p></div><button class="btn btn-primary" id="storyReply">Send Reply</button></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script type="module" src="js/app.js"></script>
 </body>
