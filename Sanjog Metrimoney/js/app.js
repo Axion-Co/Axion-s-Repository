@@ -1,0 +1,80 @@
+import { profiles, stories } from '../mock/profiles.js';
+import { profileService } from './services/profiles.js';
+import { authService } from './services/auth.js';
+import { state } from './state.js';
+import { navigate } from './router.js';
+
+const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => [...document.querySelectorAll(selector)];
+const toast = (message) => { const el=$('#toast'); el.textContent=message; el.classList.add('show'); clearTimeout(el._timer); el._timer=setTimeout(()=>el.classList.remove('show'),2200); };
+
+const dictionary={en:{brand:'Sanjog',feed:'Recommended Matches'},pa:{brand:'ਸੰਜੋਗ',feed:'ਤੁਹਾਡੇ ਲਈ ਖਾਸ ਰਿਸ਼ਤੇ'}};
+
+function profileCard(profile){
+  const protectedPhoto = profile.protectedPhoto;
+  const photo = profile.photo ? `background-image:linear-gradient(0deg,rgba(0,0,0,.68),transparent),url('${profile.photo}')` : '';
+  return `<article class="card" data-profile-id="${profile.id}">
+    <div class="card-banner ${protectedPhoto?'blur-photo':''}" style="${photo}">
+      <div class="badge-group">${profile.verified?'<span class="tag verified">✓ Verified</span>':''}<span class="tag">${profile.location}</span></div>
+      <div class="banner-copy">${protectedPhoto?'':`<h3>${profile.name}, ${profile.age}</h3><p>${profile.profession}</p>`}</div>
+    </div>
+    <div class="card-body">
+      ${protectedPhoto?`<h3 style="color:var(--primary);margin:0 0 4px">${profile.name}, ${profile.age} 🔒</h3><p style="color:var(--muted);font-size:.8rem;margin:0 0 12px">Photo protected by candidate privacy</p>`:''}
+      <div class="info-grid"><div class="info-pill">🏷️ ${profile.gotra}</div><div class="info-pill">🎓 ${profile.education}</div><div class="info-pill">📍 ${profile.district}</div><div class="info-pill">👥 By: ${profile.postedBy}</div></div>
+      <div class="actions">
+        ${protectedPhoto?'<button class="btn btn-secondary" data-action="photo">🔑 Request Photo</button>':''}
+        <button class="btn ${state.interests.has(profile.id)?'btn-success':'btn-primary'}" data-action="interest" data-id="${profile.id}">${state.interests.has(profile.id)?'✓ Interest Sent':'Express Interest'}</button>
+        <button class="btn btn-secondary" data-action="share" data-id="${profile.id}" aria-label="Share profile">↗</button>
+      </div>
+    </div>
+  </article>`;
+}
+
+async function renderRecommended(){ $('#recommendedList').innerHTML=(await profileService.getRecommended()).map(profileCard).join(''); }
+async function renderSearch(query=''){ const results=await profileService.search(query); $('#searchResults').innerHTML=results.length?results.map(profileCard).join(''):`<div class="form-card empty"><div style="font-size:2rem">🔎</div><p>No profiles found for “${query}”. Try a district, gotra or profession.</p></div>`; }
+
+function renderStories(){
+  $('#stories').innerHTML=`<button class="story" id="addStory" style="border:0;background:transparent"><div class="story-ring" style="background:var(--accent)"><div class="story-avatar">+</div></div><span>Add Story</span></button>`+stories.map(s=>`<button class="story" data-story="${s.id}" style="border:0;background:transparent"><div class="story-ring"><div class="story-avatar">${s.name[0]}</div></div><span>${s.name}</span></button>`).join('');
+}
+
+function openStory(story){
+  const item=stories.find(s=>s.id===story); if(!item) return;
+  $('#storyName').textContent=item.fullName; $('#storyDetails').textContent=item.details; $('#storyModal').classList.add('active');
+  const bar=$('#storyProgress'); bar.style.transition='none'; bar.style.width='0%'; requestAnimationFrame(()=>{bar.style.transition='width 3s linear';bar.style.width='100%';});
+  clearTimeout(state.storyTimer); state.storyTimer=setTimeout(closeStory,3000);
+}
+function closeStory(){ clearTimeout(state.storyTimer); $('#storyModal').classList.remove('active'); }
+
+function shareProfile(id){
+  profileService.getById(id).then(p=>{ if(!p)return; const text=`Sanjog Matrimonial Profile\n${p.name}, ${p.age}\n${p.profession}\n${p.location}\nGotra: ${p.gotra}`; const url=`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`; window.open(url,'_blank','noopener,noreferrer'); });
+}
+
+function toggleInterest(id){ state.interests.has(id)?state.interests.delete(id):state.interests.add(id); renderRecommended(); renderSearch($('#searchInput')?.value||''); toast(state.interests.has(id)?'Interest sent':'Interest withdrawn'); }
+
+function toggleDrawer(force){ const drawer=$('#sideDrawer'),overlay=$('#drawerOverlay'),open=force ?? !drawer.classList.contains('active'); drawer.classList.toggle('active',open); overlay.classList.toggle('active',open); $('#menuBtn').setAttribute('aria-expanded',String(open)); }
+
+function setLanguage(){ state.currentLang=state.currentLang==='en'?'pa':'en'; const d=dictionary[state.currentLang]; $('#brandTitle').textContent=d.brand; $('#feedTitle').textContent=d.feed; $('#langBtn').textContent=state.currentLang==='en'?'🌐 EN / ਪੰਜਾਬੀ':'🌐 ਪੰਜਾਬੀ / EN'; }
+
+async function init(){
+  state.user=await authService.getCurrentUser();
+  $('#name').value=state.user.name; $('#privacy').value=state.user.photoPrivacy; $('#district').value=state.user.district; $('#gotra').value=state.user.gotra;
+  renderStories(); await renderRecommended(); await renderSearch();
+
+  document.addEventListener('click', async e=>{
+    const nav=e.target.closest('[data-nav]'); if(nav){ navigate(nav.dataset.nav); toggleDrawer(false); return; }
+    const action=e.target.closest('[data-action]'); if(action){
+      if(action.dataset.action==='interest') toggleInterest(action.dataset.id);
+      if(action.dataset.action==='share') shareProfile(action.dataset.id);
+      if(action.dataset.action==='photo') toast('Photo access request queued');
+      return;
+    }
+    const story=e.target.closest('[data-story]'); if(story){openStory(story.dataset.story);return;}
+    if(e.target.closest('#addStory')) toast('Story upload will be connected to storage later');
+  });
+  $('#menuBtn').addEventListener('click',()=>toggleDrawer()); $('#closeDrawer').addEventListener('click',()=>toggleDrawer(false)); $('#drawerOverlay').addEventListener('click',()=>toggleDrawer(false));
+  $('#langBtn').addEventListener('click',setLanguage); $('#closeStory').addEventListener('click',closeStory); $('#storyReply').addEventListener('click',()=>{closeStory();navigate('chats');toast('Reply flow ready for backend connection');});
+  $('#searchInput').addEventListener('input',e=>renderSearch(e.target.value));
+  $('#profileForm').addEventListener('submit',async e=>{e.preventDefault(); const data=Object.fromEntries(new FormData(e.currentTarget)); state.user=await authService.updateUser(data); toast('Profile changes saved locally');});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){toggleDrawer(false);closeStory();}});
+}
+init();
