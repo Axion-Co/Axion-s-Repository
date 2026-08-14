@@ -29,17 +29,17 @@
       <div>
         <div class="drawer-header"><div class="brand"><span class="logo" aria-hidden="true">S</span><span class="brand-title">Sanjog</span></div><button class="header-btn" id="closeDrawer" aria-label="Close menu">✕</button></div>
         <nav class="drawer-menu">
-          <button class="drawer-item" data-nav="home">🏠 Home</button>
-          <button class="drawer-item" data-nav="search">🔍 Search</button>
-          <button class="drawer-item" data-nav="matches">🤝 Matches</button>
-          <button class="drawer-item" data-nav="chats">💬 Chats</button>
-          <button class="drawer-item" data-nav="profile">👤 Profile</button>
-          <button class="drawer-item" data-nav="settings">⚙️ Settings</button>
+          <button class="drawer-item" data-nav="home">🏠 <span>Home</span></button>
+          <button class="drawer-item" data-nav="search">🔍 <span>Search</span></button>
+          <button class="drawer-item" data-nav="matches">🤝 <span>Matches</span></button>
+          <button class="drawer-item" data-nav="chats">💬 <span>Chats</span></button>
+          <button class="drawer-item" data-nav="profile">👤 <span>Profile</span></button>
+          <button class="drawer-item" data-nav="settings">⚙️ <span>Settings</span></button>
           <div class="drawer-divider"></div>
-          <button class="drawer-item" data-nav="privacy">🔒 Privacy Policy</button>
-          <button class="drawer-item" data-nav="tnc">📄 Terms &amp; Conditions</button>
-          <button class="drawer-item" data-nav="about">ℹ️ About Us</button>
-          <button class="drawer-item" data-nav="contact">📞 Contact Us</button>
+          <button class="drawer-item" data-nav="privacy">🔒 <span>Privacy Policy</span></button>
+          <button class="drawer-item" data-nav="tnc">📄 <span>Terms &amp; Conditions</span></button>
+          <button class="drawer-item" data-nav="about">ℹ️ <span>About Us</span></button>
+          <button class="drawer-item" data-nav="contact">📞 <span>Contact Us</span></button>
         </nav>
       </div>
       <p class="drawer-trust">Sanjog Matrimonial<br><span>Trust &amp; Safety First</span></p>
@@ -47,12 +47,22 @@
 
     <main id="page-home" class="page active" aria-label="Home">
       <div class="stories" id="stories" aria-label="Member stories"></div>
-      <div class="section-header home-heading"><div><p class="eyebrow">Curated for you</p><h1 class="section-title" id="feedTitle">Recommended Matches</h1></div><button class="link-btn" data-nav="search">Filter</button></div>
+      <section class="home-hero" aria-labelledby="heroTitle">
+        <div class="hero-glow" aria-hidden="true"></div>
+        <div class="hero-content">
+          <span class="hero-kicker">TRUSTED MATRIMONIAL CONNECTIONS</span>
+          <h1 id="heroTitle">Meaningful connections,<br><em>rooted in trust.</em></h1>
+          <p>Discover compatible profiles with privacy, family values and genuine intent at the heart of every connection.</p>
+          <div class="hero-pills"><span>✓ Privacy first</span><span>✓ Verified profiles</span></div>
+        </div>
+      </section>
+      <div class="section-header home-heading"><div><p class="eyebrow">Curated for you</p><h2 class="section-title" id="feedTitle">Recommended Matches</h2></div><button class="link-btn" data-nav="search">Filter <span aria-hidden="true">→</span></button></div>
       <section id="recommendedList" aria-live="polite"></section>
     </main>
 
     <main id="page-search" class="page" aria-label="Search">
-      <div class="form-card search-card"><p class="eyebrow">Find a meaningful connection</p><h1 class="section-title search-title">Find Your Match</h1><label class="form-group" for="searchInput"><span class="field-label">Search profiles</span><input id="searchInput" class="form-control" type="search" placeholder="Gotra, district, profession…" autocomplete="off"></label></div>
+      <div class="search-hero"><p class="eyebrow">FIND A MEANINGFUL CONNECTION</p><h1 class="section-title search-title">Find Your Match</h1><p>Search across profiles using the details that matter to you.</p></div>
+      <div class="form-card search-card"><label class="form-group" for="searchInput"><span class="field-label">Search profiles</span><input id="searchInput" class="form-control" type="search" placeholder="Gotra, district, profession…" autocomplete="off"></label></div>
       <section id="searchResults" aria-live="polite"></section>
     </main>
 
@@ -61,20 +71,21 @@
     <main id="page-chats" class="page" aria-label="Messages"></main>
 
     <main id="page-profile" class="page" aria-label="My profile">
-      <form class="form-card" id="profileForm"><p class="eyebrow">Your Sanjog profile</p><h1 class="section-title profile-heading">My Candidate Profile</h1>
+      <form class="form-card" id="profileForm"><p class="eyebrow">YOUR SANJOG PROFILE</p><h1 class="section-title profile-heading">My Candidate Profile</h1>
+        <div class="profile-complete"><div><strong>Profile foundation</strong><span>Keep your details clear and authentic.</span></div><span class="profile-complete-badge">ACTIVE</span></div>
         <div class="form-group"><label for="name">Full Candidate Name</label><input id="name" name="name" class="form-control" required></div>
         <div class="form-group"><label for="privacy">Photo Privacy</label><select id="privacy" name="photoPrivacy" class="form-control"><option value="public">Visible to everyone</option><option value="protected">Protected — visible on acceptance</option></select></div>
         <div class="form-group"><label for="district">Punjab District / Location</label><select id="district" name="district" class="form-control"><option>Ludhiana</option><option>Amritsar</option><option>Jalandhar</option><option>Mohali</option><option>NRI / Overseas</option></select></div>
         <div class="form-group"><label for="gotra">Gotra / Caste</label><input id="gotra" name="gotra" class="form-control" required></div>
-        <button class="btn btn-primary" type="submit">Save Changes</button>
+        <button class="btn btn-primary" type="submit">Save Changes <span aria-hidden="true">→</span></button>
       </form>
     </main>
 
-    <main id="page-settings" class="page" aria-label="Settings"><div class="form-card"><p class="eyebrow">Account preferences</p><h1 class="section-title">Settings</h1><p class="page-copy">Manage your profile, privacy preferences and support options.</p></div></main>
-    <main id="page-privacy" class="page" aria-label="Privacy Policy"><div class="form-card"><p class="eyebrow">Your privacy matters</p><h1 class="section-title">Privacy Policy</h1><p class="page-copy">Sanjog is designed around privacy-first profile sharing. Protected photos and personal contact details should only be exposed through authorized backend flows.</p></div></main>
-    <main id="page-tnc" class="page" aria-label="Terms and Conditions"><div class="form-card"><p class="eyebrow">Safe and respectful use</p><h1 class="section-title">Terms &amp; Conditions</h1><p class="page-copy">Users are expected to provide truthful information and use Sanjog respectfully. Final legal terms will be reviewed before production launch.</p></div></main>
-    <main id="page-about" class="page" aria-label="About Sanjog"><div class="form-card"><p class="eyebrow">Our purpose</p><h1 class="section-title">About Sanjog</h1><p class="page-copy">Sanjog Matrimonial helps Punjabi families build trusted connections with transparency, respect and strong privacy controls.</p></div></main>
-    <main id="page-contact" class="page" aria-label="Contact Sanjog"><div class="form-card"><p class="eyebrow">We're here to help</p><h1 class="section-title">Contact Us</h1><p class="page-copy">Production contact details will be configured before launch.</p></div></main>
+    <main id="page-settings" class="page" aria-label="Settings"><div class="form-card"><p class="eyebrow">ACCOUNT PREFERENCES</p><h1 class="section-title">Settings</h1><p class="page-copy">Manage your profile, privacy preferences and support options.</p></div></main>
+    <main id="page-privacy" class="page" aria-label="Privacy Policy"><div class="form-card"><p class="eyebrow">YOUR PRIVACY MATTERS</p><h1 class="section-title">Privacy Policy</h1><p class="page-copy">Sanjog is designed around privacy-first profile sharing. Protected photos and personal contact details should only be exposed through authorized backend flows.</p></div></main>
+    <main id="page-tnc" class="page" aria-label="Terms and Conditions"><div class="form-card"><p class="eyebrow">SAFE AND RESPECTFUL USE</p><h1 class="section-title">Terms &amp; Conditions</h1><p class="page-copy">Users are expected to provide truthful information and use Sanjog respectfully. Final legal terms will be reviewed before production launch.</p></div></main>
+    <main id="page-about" class="page" aria-label="About Sanjog"><div class="form-card"><p class="eyebrow">OUR PURPOSE</p><h1 class="section-title">About Sanjog</h1><p class="page-copy">Sanjog Matrimonial helps Punjabi families build trusted connections with transparency, respect and strong privacy controls.</p></div></main>
+    <main id="page-contact" class="page" aria-label="Contact Sanjog"><div class="form-card"><p class="eyebrow">WE'RE HERE TO HELP</p><h1 class="section-title">Contact Us</h1><p class="page-copy">Production contact details will be configured before launch.</p></div></main>
 
     <nav class="bottom-nav" aria-label="Primary navigation">
       <button class="nav-link" data-nav="chats"><span class="nav-icon" aria-hidden="true">💬</span><span>Chats</span></button>
