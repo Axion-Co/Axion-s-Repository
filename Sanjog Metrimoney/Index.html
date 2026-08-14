@@ -20,20 +20,14 @@
   <div class="app-viewport">
     <header class="app-header">
       <button class="header-btn" id="menuBtn" aria-label="Open menu" aria-controls="sideDrawer" aria-expanded="false">☰</button>
-      <a class="brand" href="#home" data-nav="home" aria-label="Sanjog home">
-        <span class="logo" aria-hidden="true">S</span>
-        <span class="brand-title" id="brandTitle">Sanjog</span>
-      </a>
+      <a class="brand" href="#home" data-nav="home" aria-label="Sanjog home"><span class="logo" aria-hidden="true">S</span><span class="brand-title">Sanjog</span></a>
       <button class="lang-btn" id="langBtn" type="button" aria-label="Change language">🌐 EN / ਪੰਜਾਬੀ</button>
     </header>
 
     <div class="drawer-overlay" id="drawerOverlay"></div>
     <aside class="drawer" id="sideDrawer" aria-label="Main navigation">
       <div>
-        <div class="drawer-header">
-          <div class="brand"><span class="logo" aria-hidden="true">S</span><span class="brand-title">Sanjog</span></div>
-          <button class="header-btn" id="closeDrawer" aria-label="Close menu">✕</button>
-        </div>
+        <div class="drawer-header"><div class="brand"><span class="logo" aria-hidden="true">S</span><span class="brand-title">Sanjog</span></div><button class="header-btn" id="closeDrawer" aria-label="Close menu">✕</button></div>
         <nav class="drawer-menu">
           <button class="drawer-item" data-nav="home">🏠 Home</button>
           <button class="drawer-item" data-nav="search">🔍 Search</button>
@@ -53,25 +47,12 @@
 
     <main id="page-home" class="page active" aria-label="Home">
       <div class="stories" id="stories" aria-label="Member stories"></div>
-      <div class="section-header home-heading">
-        <div>
-          <p class="eyebrow">Curated for you</p>
-          <h1 class="section-title" id="feedTitle">Recommended Matches</h1>
-        </div>
-        <button class="link-btn" data-nav="search">Filter</button>
-      </div>
+      <div class="section-header home-heading"><div><p class="eyebrow">Curated for you</p><h1 class="section-title" id="feedTitle">Recommended Matches</h1></div><button class="link-btn" data-nav="search">Filter</button></div>
       <section id="recommendedList" aria-live="polite"></section>
     </main>
 
     <main id="page-search" class="page" aria-label="Search">
-      <div class="form-card search-card">
-        <p class="eyebrow">Find a meaningful connection</p>
-        <h1 class="section-title search-title">Find Your Match</h1>
-        <label class="form-group" for="searchInput">
-          <span class="field-label">Search profiles</span>
-          <input id="searchInput" class="form-control" type="search" placeholder="Gotra, district, profession…" autocomplete="off">
-        </label>
-      </div>
+      <div class="form-card search-card"><p class="eyebrow">Find a meaningful connection</p><h1 class="section-title search-title">Find Your Match</h1><label class="form-group" for="searchInput"><span class="field-label">Search profiles</span><input id="searchInput" class="form-control" type="search" placeholder="Gotra, district, profession…" autocomplete="off"></label></div>
       <section id="searchResults" aria-live="polite"></section>
     </main>
 
@@ -80,9 +61,7 @@
     <main id="page-chats" class="page" aria-label="Messages"></main>
 
     <main id="page-profile" class="page" aria-label="My profile">
-      <form class="form-card" id="profileForm">
-        <p class="eyebrow">Your Sanjog profile</p>
-        <h1 class="section-title profile-heading">My Candidate Profile</h1>
+      <form class="form-card" id="profileForm"><p class="eyebrow">Your Sanjog profile</p><h1 class="section-title profile-heading">My Candidate Profile</h1>
         <div class="form-group"><label for="name">Full Candidate Name</label><input id="name" name="name" class="form-control" required></div>
         <div class="form-group"><label for="privacy">Photo Privacy</label><select id="privacy" name="photoPrivacy" class="form-control"><option value="public">Visible to everyone</option><option value="protected">Protected — visible on acceptance</option></select></div>
         <div class="form-group"><label for="district">Punjab District / Location</label><select id="district" name="district" class="form-control"><option>Ludhiana</option><option>Amritsar</option><option>Jalandhar</option><option>Mohali</option><option>NRI / Overseas</option></select></div>
@@ -94,7 +73,7 @@
     <main id="page-settings" class="page" aria-label="Settings"><div class="form-card"><p class="eyebrow">Account preferences</p><h1 class="section-title">Settings</h1><p class="page-copy">Manage your profile, privacy preferences and support options.</p></div></main>
     <main id="page-privacy" class="page" aria-label="Privacy Policy"><div class="form-card"><p class="eyebrow">Your privacy matters</p><h1 class="section-title">Privacy Policy</h1><p class="page-copy">Sanjog is designed around privacy-first profile sharing. Protected photos and personal contact details should only be exposed through authorized backend flows.</p></div></main>
     <main id="page-tnc" class="page" aria-label="Terms and Conditions"><div class="form-card"><p class="eyebrow">Safe and respectful use</p><h1 class="section-title">Terms &amp; Conditions</h1><p class="page-copy">Users are expected to provide truthful information and use Sanjog respectfully. Final legal terms will be reviewed before production launch.</p></div></main>
-    <main id="page-about" class="page" aria-label="About Sanjog"><div class="form-card"><p class="eyebrow">Our purpose</p><h1 class="section-title">About Sanjog</h1><p class="page-copy">Sanjog Matrimonial is being designed to help Punjabi families build trusted connections with transparency, respect and strong privacy controls.</p></div></main>
+    <main id="page-about" class="page" aria-label="About Sanjog"><div class="form-card"><p class="eyebrow">Our purpose</p><h1 class="section-title">About Sanjog</h1><p class="page-copy">Sanjog Matrimonial helps Punjabi families build trusted connections with transparency, respect and strong privacy controls.</p></div></main>
     <main id="page-contact" class="page" aria-label="Contact Sanjog"><div class="form-card"><p class="eyebrow">We're here to help</p><h1 class="section-title">Contact Us</h1><p class="page-copy">Production contact details will be configured before launch.</p></div></main>
 
     <nav class="bottom-nav" aria-label="Primary navigation">
